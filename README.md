@@ -41,7 +41,7 @@ Our project provides a unified toolkit for mapping, quantifying, and exploring t
 
 ## KIDS25-Team14 
 
-* Kincaid Rowbotham
+* Kincaid Rowbotham [@kincaidrowboth](https://github.com/kincaidrowboth)
 * Lei Li
 * Saranya Canchi
 * Madhan Kumar Tammineni
