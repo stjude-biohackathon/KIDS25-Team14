@@ -1,0 +1,436 @@
+---
+title: "test"
+output: html_document
+date: "2025-09-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## load packages
+```{r cars}
+library(mulea)
+library(tidyverse)
+```
+
+
+## #############################
+## play with our own data
+## #############################
+
+```{r}
+annotate_gsea_results <- function(gsea_results_filtered, gsea_model, ordered_set_full) {
+  # Ensure rownames of ordered_set_full are gene names for easy lookup
+  rownames(ordered_set_full) <- ordered_set_full$Gene_Name
+  
+  # Extract ontology IDs from filtered GSEA results
+  og_id_list <- gsea_results_filtered$ontology_id
+  
+  # Initialize output vectors
+  gene_in_og <- character(length(og_id_list))
+  protein <- character(length(og_id_list))
+  
+  # Loop through each ontology ID
+  for (i in seq_along(og_id_list)) {
+    cur_og_id <- og_id_list[i]
+    
+    # Find matching ontology in the GSEA model
+    og_index <- which(gsea_model@gmt[["ontology_id"]] == cur_og_id)
+    
+    # Get genes in current ontology
+    genes_in_cur_og <- gsea_model@gmt[["list_of_values"]][[og_index]]
+    
+    # Identify target genes in the ordered set
+    target_genes <- intersect(genes_in_cur_og, ordered_set_full$Gene_Name)
+    gene_in_og[i] <- paste(target_genes, collapse = "#")
+    
+    # Find corresponding protein IDs
+    target_proteins <- unlist(ordered_set_full[target_genes, 'GN_ID'])
+    protein[i] <- paste(target_proteins, collapse = "#")
+  }
+  
+  # Add results back to gsea_results_filtered
+  gsea_results_filtered$gene_in_pathway <- gene_in_og
+  gsea_results_filtered$protein <- protein
+  
+  # Return the updated data frame
+  return(gsea_results_filtered)
+}
+
+```
+
+# read input data
+
+```{r}
+library(readxl)
+data.up <- read_excel("Inputs/data.xlsx", sheet = 'up')
+data.down <- read_excel("Inputs/data.xlsx", sheet = 'down')
+
+colnames(data.up) <- c("GN_ID","Gene_Name","log2FC","p-log10")
+colnames(data.down) <- c("GN_ID","Gene_Name","log2FC","p-log10")
+```
+
+# identify and remove the redundant records in both up/down tabs
+
+```{r}
+overlap.genes <- intersect(data.up$Gene_Name, data.down$Gene_Name)
+data.up.filtered <- data.up[which(!(data.up$Gene_Name %in% overlap.genes)),]
+data.down.filtered <- data.down[which(!(data.down$Gene_Name %in% overlap.genes)),]
+
+intersect(data.up.filtered$Gene_Name, data.down.filtered$Gene_Name)
+```
+
+# merge multiple records (due to isoforms) of the same gene, keep the one with highest difference (Log2FC)
+
+```{r}
+data.up.filtered.merge <- data.up.filtered %>%
+  group_by(Gene_Name) %>%
+  slice_max(order_by = log2FC, n = 1, with_ties = FALSE) %>%
+  ungroup()
+
+data.down.filtered.merge <- data.down.filtered %>%
+  group_by(Gene_Name) %>%
+  slice_min(order_by = log2FC, n = 1, with_ties = FALSE) %>%
+  ungroup()
+```
+
+# input ready for mulea
+
+```{r}
+ordered_set_full <- rbind(data.up.filtered.merge, data.down.filtered.merge)
+ordered_set <- ordered_set_full[,c(2,3)]
+```
+
+
+# ###############################################################
+# Enrichment analysis using all GO terms and genesets
+# ###############################################################
+```{r}
+# load GMT
+tf_ontology <- read_gmt("Genesets/GO_All_Mus_musculus_GeneSymbol.gmt")
+```
+
+# run the GSEA
+```{r}
+# Creating the GSEA model using the GMT variable
+gsea_model <- gsea(gmt = tf_ontology,
+                   # Names of elements to test
+                   element_names = ordered_set$Gene_Name,
+                   # LogFC-s of elements to test
+                   element_scores = ordered_set$log2FC,
+                   # Consider elements having both positive and negative logFC values
+                   element_score_type = "std",
+                   # Number of permutations
+                   number_of_permutations = 10000)
+
+# Running the GSEA
+gsea_results <- run_test(gsea_model)
+```
+
+# filter results
+```{r}
+gsea_results %>%
+  # rows where the adjusted_p_value < 0.05
+  filter(p_value < 0.05) %>% 
+  # the number of such rows
+  nrow()
+#> [1] 10
+```
+
+```{r}
+gsea_results.filtered <- gsea_results %>%
+  # arrange the rows by the adjusted_p_value values
+  arrange(p_value) %>% 
+  # rows where the adjusted_p_value < 0.05
+  filter(p_value < 0.05)
+```
+
+# annotate and save results into CSV
+```{r}
+gsea_results.filtered <- annotate_gsea_results(gsea_results.filtered, gsea_model, ordered_set_full)
+write.csv(x = gsea_results.filtered, file = 'Outputs/GSEA_results.csv')
+```
+
+
+```{r}
+# Reshaping the GSEA results for visualisation
+gsea_reshaped_results <- reshape_results(model = gsea_model, 
+                                         model_results = gsea_results, 
+                                         # choosing which column to use for the
+                                         # indication of significance
+                                         p_value_type_colname = "p_value")
+```
+
+
+```{r fig.height=15,fig.width=17,dpi=300}
+p <- plot_graph(reshaped_results = gsea_reshaped_results,
+           # the column containing the names we wish to plot
+           ontology_id_colname = "ontology_id",
+           # upper threshold for the value indicating the significance
+           p_value_max_threshold = 0.05,
+           # column that indicates the significance values
+           p_value_type_colname = "p_value")
+
+
+png("Figs/graph_GO.png", width = 9000, height = 8000, res = 300)
+print(p)  # or just p if it's the last object
+dev.off()
+```
+
+```{r fig.height=15,fig.width=10,dpi=300}
+p <- plot_lollipop(reshaped_results = gsea_reshaped_results,
+              # Column containing the names we wish to plot
+              ontology_id_colname = "ontology_id",
+              # Upper threshold for the value indicating the significance
+              p_value_max_threshold = 0.05,
+              # Column that indicates the significance values
+              p_value_type_colname = "p_value")
+
+png("Figs/lollipop_GO.png", width = 4000, height = 5000, res = 300)
+print(p)  
+dev.off()
+```
+
+
+```{r fig.height=15,fig.width=17,dpi=300}
+p <- plot_heatmap(reshaped_results = gsea_reshaped_results,
+             # Column containing the names we wish to plot
+             ontology_id_colname = "ontology_id",
+             # Column that indicates the significance values
+             p_value_type_colname = "p_value")
+
+png("Figs/heatmap_GO.png", width = 4000, height = 7000, res = 300)
+print(p)  
+dev.off()
+```
+
+# ###############################################################
+# Enrichment analysis using KEGG genesets
+# ###############################################################
+
+# load all KEGG pathways
+```{r}
+library(msigdbr)
+mouse_KEGG_LEGACY <- msigdbr(species = "Mus musculus", collection = "C2", subcollection = 'CP:KEGG_LEGACY')
+mouse_KEGG_MEDICUS <- msigdbr(species = "Mus musculus", collection = "C2", subcollection = 'CP:KEGG_MEDICUS')
+```
+
+```{r}
+# re-format KEGG genesets
+# Reformat msigdbr data to three-column format
+reformat_genesets <- function(msigdbr_df) {
+  msigdbr_df %>%
+    dplyr::select(ontology_id = gs_id, 
+                  ontology_name = gs_name, 
+                  gene_symbol) %>%
+    dplyr::group_by(ontology_id, ontology_name) %>%
+    dplyr::summarise(
+      list_of_values = list(unique(gene_symbol)),
+      .groups = "drop"
+    )
+}
+
+
+# Reformat
+kegg_legacy_formatted <- reformat_genesets(mouse_KEGG_LEGACY)
+kegg_medicus_formatted <- reformat_genesets(mouse_KEGG_MEDICUS)
+
+# View example
+head(kegg_legacy_formatted)
+head(kegg_medicus_formatted)
+```
+
+# Enrichment analysis using kegg_legacy genesets
+
+```{r}
+# Creating the GSEA model using the GMT variable
+gsea_model_kegg_legacy <- gsea(gmt = kegg_legacy_formatted,
+                   # Names of elements to test
+                   element_names = ordered_set$Gene_Name,
+                   # LogFC-s of elements to test
+                   element_scores = ordered_set$log2FC,
+                   # Consider elements having positive logFC values only
+                   element_score_type = "std",
+                   # Number of permutations
+                   number_of_permutations = 10000)
+
+# Running the GSEA
+gsea_results_kegg_legacy <- run_test(gsea_model_kegg_legacy)
+```
+
+```{r}
+gsea_results_kegg_legacy %>%
+  # rows where the adjusted_p_value < 0.05
+  filter(p_value < 0.05) %>% 
+  # the number of such rows
+  nrow()
+#> [1] 10
+```
+
+```{r}
+gsea_results_kegg_legacy.filtered <- gsea_results_kegg_legacy %>%
+  # arrange the rows by the adjusted_p_value values
+  arrange(p_value) %>% 
+  # rows where the adjusted_p_value < 0.05
+  filter(p_value < 0.05)
+```
+
+```{r}
+gsea_results_kegg_legacy.filtered <- annotate_gsea_results(gsea_results_kegg_legacy.filtered, gsea_model_kegg_legacy, ordered_set_full)
+write.csv(x = gsea_results_kegg_legacy.filtered, file = 'Outputs/GSEA_results_kegg_legacy.csv')
+```
+
+```{r}
+# Reshaping the GSEA results for visualisation
+gsea_reshaped_results_kegg_legacy <- reshape_results(model = gsea_model_kegg_legacy, 
+                                         model_results = gsea_results_kegg_legacy, 
+                                         # choosing which column to use for the
+                                         # indication of significance
+                                         p_value_type_colname = "p_value")
+```
+
+```{r fig.height=6,fig.width=8,dpi=300}
+p <- plot_graph(reshaped_results = gsea_reshaped_results_kegg_legacy,
+           # the column containing the names we wish to plot
+           ontology_id_colname = "ontology_id",
+           # upper threshold for the value indicating the significance
+           p_value_max_threshold = 0.05,
+           # column that indicates the significance values
+           p_value_type_colname = "p_value")
+
+png("Figs/graph_kegg_legacy.png", width = 4000, height = 3500, res = 300)
+print(p)  
+dev.off()
+```
+
+```{r fig.height=8,fig.width=6,dpi=300}
+p <- plot_lollipop(reshaped_results = gsea_reshaped_results_kegg_legacy,
+              # Column containing the names we wish to plot
+              ontology_id_colname = "ontology_id",
+              # Upper threshold for the value indicating the significance
+              p_value_max_threshold = 0.05,
+              # Column that indicates the significance values
+              p_value_type_colname = "p_value")
+
+png("Figs/lollipop_kegg_legacy.png", width = 3000, height = 2500, res = 300)
+print(p)  
+dev.off()
+```
+
+
+```{r fig.height=6,fig.width=8,dpi=300}
+p <- plot_heatmap(reshaped_results = gsea_reshaped_results_kegg_legacy,
+             # Column containing the names we wish to plot
+             ontology_id_colname = "ontology_id",
+             # Column that indicates the significance values
+             p_value_type_colname = "p_value")
+
+png("Figs/heatmap_kegg_legacy.png", width = 3000, height = 1500, res = 300)
+print(p)  
+dev.off()
+```
+
+# Enrichment analysis using kegg_medicus genesets
+
+```{r}
+# Creating the GSEA model using the GMT variable
+gsea_model_kegg_medicus <- gsea(gmt = kegg_medicus_formatted,
+                   # Names of elements to test
+                   element_names = ordered_set$Gene_Name,
+                   # LogFC-s of elements to test
+                   element_scores = ordered_set$log2FC,
+                   # Consider elements having positive logFC values only
+                   element_score_type = "std",
+                   # Number of permutations
+                   number_of_permutations = 10000)
+
+# Running the GSEA
+gsea_results_kegg_medicus <- run_test(gsea_model_kegg_medicus)
+```
+
+```{r}
+gsea_results_kegg_medicus %>%
+  # rows where the adjusted_p_value < 0.05
+  filter(p_value < 0.05) %>% 
+  # the number of such rows
+  nrow()
+#> [1] 10
+```
+
+```{r}
+gsea_results_kegg_medicus.filtered <- gsea_results_kegg_medicus %>%
+  # arrange the rows by the adjusted_p_value values
+  arrange(p_value) %>% 
+  # rows where the adjusted_p_value < 0.05
+  filter(p_value < 0.05)
+```
+
+```{r}
+gsea_results_kegg_medicus.filtered <- annotate_gsea_results(gsea_results_kegg_medicus.filtered, gsea_model_kegg_medicus, ordered_set_full)
+write.csv(x = gsea_results_kegg_medicus.filtered, file = 'Outputs/GSEA_results_kegg_medicus.csv')
+```
+
+```{r}
+# Reshaping the GSEA results for visualisation
+gsea_reshaped_results_kegg_medicus <- reshape_results(model = gsea_model_kegg_medicus, 
+                                         model_results = gsea_results_kegg_medicus, 
+                                         # choosing which column to use for the
+                                         # indication of significance
+                                         p_value_type_colname = "p_value")
+```
+
+```{r fig.height=6,fig.width=8,dpi=300}
+p <- plot_graph(reshaped_results = gsea_reshaped_results_kegg_medicus,
+           # the column containing the names we wish to plot
+           ontology_id_colname = "ontology_id",
+           # upper threshold for the value indicating the significance
+           p_value_max_threshold = 0.05,
+           # column that indicates the significance values
+           p_value_type_colname = "p_value")
+
+png("Figs/graph_kegg_medicus.png", width = 4000, height = 3500, res = 300)
+print(p)  
+dev.off()
+```
+
+```{r fig.height=8,fig.width=6,dpi=300}
+p <- plot_lollipop(reshaped_results = gsea_reshaped_results_kegg_medicus,
+              # Column containing the names we wish to plot
+              ontology_id_colname = "ontology_id",
+              # Upper threshold for the value indicating the significance
+              p_value_max_threshold = 0.05,
+              # Column that indicates the significance values
+              p_value_type_colname = "p_value")
+
+png("Figs/lollipop_kegg_medicus.png", width = 2000, height = 3000, res = 300)
+print(p)  
+dev.off()
+```
+
+
+```{r fig.height=6,fig.width=8,dpi=300}
+p <- plot_heatmap(reshaped_results = gsea_reshaped_results_kegg_medicus,
+             # Column containing the names we wish to plot
+             ontology_id_colname = "ontology_id",
+             # Column that indicates the significance values
+             p_value_type_colname = "p_value")
+
+png("Figs/heatmap_kegg_medicus.png", width = 2000, height = 3000, res = 300)
+print(p)  
+dev.off()
+```
+
+# save the working space into file
+
+```{r}
+save.image(file = 'working.RData')
+```
+
+
+# session info
+
+```{r}
+sessionInfo()
+```
+
