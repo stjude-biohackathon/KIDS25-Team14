@@ -333,32 +333,7 @@ serverB <- function(id, results_rv, back_to_input) {
       )
       list(src=tmp, contentType="image/png", width="100%")
     }, deleteFile=TRUE)
-    
-    output$volcano_plot <- renderImage({
-      df <- comb_df()
-      validate(need(!is.null(df) && nrow(df) > 0, "No up/down data."))
-      lab <- df %>% arrange(desc(.data[["neglog10P"]] %||% 0)) %>% head(10)
-      tmp <- tempfile(fileext = ".png")
-      ragg::agg_png(tmp, width = 1000, height = 560, res = 120); on.exit(dev.off())
-      print(
-        ggplot(df, aes(x=.data[["log2FC"]], y=.data[["neglog10P"]], color=Direction)) +
-          geom_point(alpha=0.7, size=1.8, na.rm = TRUE) +
-          geom_text_repel(aes(label=Protein_ID), data=lab, size=3.2, max.overlaps=80, na.rm = TRUE) +
-          scale_color_manual(values=c(Up="#ef4444", Down="#3b82f6")) +
-          geom_hline(yintercept=1.3, linetype="dashed", color="gray60") +
-          theme_minimal(base_size=14) +
-          labs(title="Volcano Plot", x="log2FC", y="-log10(P)")
-      )
-      list(src=tmp, contentType="image/png", width="100%")
-    }, deleteFile=TRUE)
-    
-    output$top_tbl <- renderDT({
-      u <- up_df()  %||% tibble()
-      d <- down_df()%||% tibble()
-      up10 <- u %>% arrange(desc(.data[["neglog10P"]] %||% 0)) %>% head(10) %>% mutate(Set="Up")
-      down10 <- d %>% arrange(desc(.data[["neglog10P"]] %||% 0)) %>% head(10) %>% mutate(Set="Down")
-      datatable(bind_rows(up10, down10), options=list(pageLength=10), rownames=FALSE)
-    })
+
     
     # ----------------- GO -----------------
     output$go_tbl <- renderDT({
@@ -585,11 +560,7 @@ serverB <- function(id, results_rv, back_to_input) {
                  h4("Up vs Down Bar Plot"),
                  imageOutput(ns("counts_plot"), height = "380px"),
                  br(),
-                 h4("Volcano Plot"),
-                 imageOutput(ns("volcano_plot"), height = "560px"),
-                 br(),
-                 h4("Top Proteins"),
-                 DTOutput(ns("top_tbl"))
+                
         )
       )
       
