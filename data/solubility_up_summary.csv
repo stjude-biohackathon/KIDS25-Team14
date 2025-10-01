@@ -1,0 +1,260 @@
+dataset,query_uniprot_id,unique_targets_count,target_ids
+solubility_up,P07759,6,"P61939, Q00898, Q00896, P07758, Q00897, P22599"
+solubility_up,P07758,6,"Q00896, Q00898, P22599, Q00897, P61939, P07759"
+solubility_up,Q00896,6,"P07758, Q00898, Q00897, P22599, P61939, P07759"
+solubility_up,Q00897,6,"P22599, Q00896, Q00898, P07758, P07759, P61939"
+solubility_up,Q00898,6,"Q00896, P07758, Q00897, P22599, P07759, P61939"
+solubility_up,P61939,6,"P07759, Q00896, P07758, Q00898, P22599, Q00897"
+solubility_up,P22599,6,"Q00897, P07758, Q00896, Q00898, P07759, P61939"
+solubility_up,P11588,5,"A2BIN1, E9QA79, Q69ZN7, P28665, F8VPN4"
+solubility_up,Q8C3X2,5,"Q9DBZ1, Q9R269, Q64727, Q8BMK4, P28738"
+solubility_up,P29391,5,"F8VPK0, Q64727, Q9R269, P70170, F8VPN4"
+solubility_up,A2BIN1,5,"P11588, E9QA79, Q69ZN7, P28665, F8VPN4"
+solubility_up,Q9DCV4,4,"F8VPK0, Q64727, P70170, Q8CGY6"
+solubility_up,Q9DCX2,4,"Q64727, Q9R269, P70170, F8VPK0"
+solubility_up,Q9JK48,4,"Q64727, P70170, F8VPK0, Q9R269"
+solubility_up,Q9QXM1,4,"Q64727, Q9R269, F8VPK0, P70170"
+solubility_up,Q9D2M8,4,"Q9CZY3, Q69ZN7, F8VPN4, P61087"
+solubility_up,Q9DBP5,4,"Q9R0Y5, F8VPN4, P70170, Q69ZN7"
+solubility_up,Q9WV80,4,"Q64727, F8VPK0, P70170, Q9R269"
+solubility_up,Q7M729,4,"Q69ZN7, P70170, P28665, F8VPN4"
+solubility_up,Q64726,4,"P14427, F8VPN4, P28665, Q69ZN7"
+solubility_up,P68037,4,"P62838, P61087, Q69ZN7, F8VPN4"
+solubility_up,Q9CR16,4,"Q99KR7, F8VPK0, P70170, F8VPN4"
+solubility_up,Q9CR26,4,"F8VPK0, Q64727, P70170, F8VPN4"
+solubility_up,P07309,3,"P28665, Q69ZN7, F8VPN4"
+solubility_up,Q9EQ06,3,"P70170, P08074, F8VPN4"
+solubility_up,P14069,3,"P50543, P97352, P70170"
+solubility_up,P11499,3,"P07901, F8VPN4, Q69ZN7"
+solubility_up,P12382,3,"Q9WUA3, F8VPN4, P70170"
+solubility_up,Q9JK42,3,"Q8BFP9, P70170, F8VPN4"
+solubility_up,B2RVY9,3,"P70170, F8VPK0, F8VPN4"
+solubility_up,Q9Z239,3,"P70170, Q64727, Q9ES00"
+solubility_up,Q60715,3,"Q60716, F8VPK0, P70170"
+solubility_up,Q80UY1,3,"F8VPN4, Q69ZN7, P70170"
+solubility_up,Q8C0M9,3,"Q571I9, P12382, F8VPN4"
+solubility_up,Q8CI32,3,"Q64727, P70170, F8VPK0"
+solubility_up,Q9Z1T2,3,"Q9R0G6, Q69ZN7, F8VPN4"
+solubility_up,Q9WV91,3,"Q69ZN7, P28665, F8VPN4"
+solubility_up,Q9R269,3,"Q64727, F8VPK0, P70170"
+solubility_up,Q8BJ03,3,"P70170, F8VPK0, F8VPN4"
+solubility_up,Q8BHG2,3,"Q69ZN7, P28665, F8VPN4"
+solubility_up,D3Z6H8,3,"P28665, Q69ZN7, F8VPN4"
+solubility_up,O09110,3,"P70236, F8VPN4, P70170"
+solubility_up,F8VPK0,3,"P70170, Q64727, Q8CGY6"
+solubility_up,Q9R0Y5,3,"Q9DBP5, F8VPN4, P70170"
+solubility_up,Q9R0G6,3,"Q9Z1T2, F8VPN4, Q69ZN7"
+solubility_up,E9QA79,3,"P11588, A2BIN1, Q69ZN7"
+solubility_up,P50543,3,"P14069, P97352, P70170"
+solubility_up,Q9D3D9,3,"Q571I9, P28665, Q69ZN7"
+solubility_up,Q9D7X8,3,"Q69ZN7, F8VPN4, P28665"
+solubility_up,Q9D8S9,3,"Q8BGS2, Q571I9, F8VPN4"
+solubility_up,Q9CZY3,3,"Q9D2M8, Q69ZN7, F8VPN4"
+solubility_up,Q99LP6,3,"Q64727, Q9R269, P70170"
+solubility_up,Q6NSR8,3,"Q571I9, F8VPN4, P70170"
+solubility_up,Q9CZ30,3,"F8VPN4, Q69ZN7, P70170"
+solubility_up,Q9CYG7,3,"F8VPK0, Q8CGY6, Q64727"
+solubility_up,P70452,3,"Q64727, Q9R269, P70170"
+solubility_up,P97352,3,"P14069, P50543, P70170"
+solubility_up,Q3URD3,3,"Q9R269, P70170, Q64727"
+solubility_up,Q9D6U8,3,"Q64727, F8VPK0, P70170"
+solubility_up,P14427,3,"Q64726, F8VPN4, Q69ZN7"
+solubility_up,P61087,3,"P62838, F8VPN4, P70170"
+solubility_up,P50518,3,"Q64727, Q9R269, P70170"
+solubility_up,P16045,3,"Q69ZN7, P28665, F8VPN4"
+solubility_up,Q8R0P4,3,"Q571I9, F8VPN4, Q69ZN7"
+solubility_up,Q8BFP9,3,"Q9JK42, P70170, F8VPN4"
+solubility_up,Q8BVI4,3,"Q571I9, P70170, F8VPN4"
+solubility_up,Q6PCP5,3,"P70170, Q9R269, Q64727"
+solubility_up,Q99KR7,3,"Q9CR16, Q69ZN7, F8VPN4"
+solubility_up,P62838,3,"P61087, P68037, F8VPN4"
+solubility_up,P63038,3,"P70170, Q64727, F8VPN4"
+solubility_up,P30416,3,"F8VPK0, F8VPN4, Q8CGY6"
+solubility_up,Q9WUA3,3,"P12382, F8VPN4, P70170"
+solubility_up,P09813,2,"Q9DBZ1, Q9R269"
+solubility_up,Q9JI99,2,"P70170, F8VPN4"
+solubility_up,P07901,2,"P11499, Q69ZN7"
+solubility_up,Q9ES00,2,"F8VPN4, P70170"
+solubility_up,Q9JHU2,2,"Q9R269, Q64727"
+solubility_up,Q9DBZ1,2,"Q8BMK4, Q9R269"
+solubility_up,Q9QWW1,2,"Q9R269, Q64727"
+solubility_up,P38060,2,"Q571I9, F8VPN4"
+solubility_up,P39053,2,"P70170, F8VPN4"
+solubility_up,P42225,2,"P70170, F8VPN4"
+solubility_up,O54734,2,"F8VPN4, Q69ZN7"
+solubility_up,O70475,2,"F8VPN4, P70170"
+solubility_up,P06151,2,"P70170, F8VPN4"
+solubility_up,P07356,2,"F8VPN4, P70170"
+solubility_up,P09470,2,"F8VPN4, P70170"
+solubility_up,P18572,2,"Q69ZN7, P28665"
+solubility_up,Q9D1Q6,2,"F8VPN4, Q69ZN7"
+solubility_up,Q9D710,2,"P70170, F8VPN4"
+solubility_up,Q9DB60,2,"Q571I9, F8VPN4"
+solubility_up,Q9DBC7,2,"F8VPN4, Q69ZN7"
+solubility_up,Q03265,2,"F8VPN4, P70170"
+solubility_up,Q9DB20,2,"P70170, Q64727"
+solubility_up,P55772,2,"P70170, F8VPN4"
+solubility_up,Q64105,2,"Q571I9, P70170"
+solubility_up,Q64727,2,"F8VPK0, P70170"
+solubility_up,Q6IRU5,2,"Q9R269, Q64727"
+solubility_up,Q6NVE9,2,"F8VPN4, Q69ZN7"
+solubility_up,Q08093,2,"F8VPN4, P70170"
+solubility_up,Q3U3R4,2,"P70170, F8VPN4"
+solubility_up,Q3UMW7,2,"P49138, Q6PHZ2"
+solubility_up,Q9CY50,2,"P28665, Q69ZN7"
+solubility_up,P70236,2,"O09110, F8VPN4"
+solubility_up,P99029,2,"Q571I9, F8VPN4"
+solubility_up,Q60716,2,"Q60715, F8VPN4"
+solubility_up,P63073,2,"Q69ZN7, P70170"
+solubility_up,Q5SUV5,2,"Q6PHZ2, F8VPN4"
+solubility_up,Q5BKP2,2,"F8VPN4, Q69ZN7"
+solubility_up,Q4ZJN1,2,"Q69ZN7, P28665"
+solubility_up,Q3UPL0,2,"P70170, F8VPN4"
+solubility_up,P97823,2,"P70170, F8VPN4"
+solubility_up,P97471,2,"F8VPN4, Q69ZN7"
+solubility_up,P49138,2,"Q3UMW7, Q6PHZ2"
+solubility_up,P56376,2,"Q69ZN7, F8VPN4"
+solubility_up,P28665,2,"Q69ZN7, F8VPN4"
+solubility_up,P32848,2,"Q61233, F8VPN4"
+solubility_up,P56812,2,"Q9R269, Q64727"
+solubility_up,Q91YY4,2,"P70170, F8VPN4"
+solubility_up,Q80W37,2,"F8VPN4, Q69ZN7"
+solubility_up,Q61830,2,"F8VPN4, Q69ZN7"
+solubility_up,Q61584,2,"F8VPN4, Q69ZN7"
+solubility_up,Q61599,2,"Q69ZN7, P28665"
+solubility_up,Q61233,2,"P70170, F8VPN4"
+solubility_up,Q99KU0,2,"P70170, F8VPN4"
+solubility_up,Q99KR3,2,"F8VPN4, P70170"
+solubility_up,Q99KK7,2,"F8VPN4, P70170"
+solubility_up,Q91V79,2,"P70170, Q571I9"
+solubility_up,Q91VW3,2,"F8VPN4, Q69ZN7"
+solubility_up,Q91X78,2,"Q8BFZ9, P70170"
+solubility_up,Q91YN5,2,"F8VPN4, Q69ZN7"
+solubility_up,Q80SY6,2,"F8VPN4, P70170"
+solubility_up,Q80UM7,2,"F8VPN4, Q571I9"
+solubility_up,Q8BT60,2,"Q69ZN7, F8VPN4"
+solubility_up,Q8BJF9,2,"Q64727, Q9R269"
+solubility_up,Q99JX3,2,"Q69ZN7, F8VPN4"
+solubility_up,Q99JR5,2,"F8VPN4, Q69ZN7"
+solubility_up,Q99JH8,2,"P70170, F8VPK0"
+solubility_up,Q99J36,2,"Q69ZN7, F8VPN4"
+solubility_up,Q922Y1,2,"Q64727, Q9R269"
+solubility_up,Q91ZR2,2,"F8VPN4, P70170"
+solubility_up,Q8K182,2,"F8VPN4, Q69ZN7"
+solubility_up,Q8R0N6,2,"F8VPN4, P70170"
+solubility_up,Q9WVG6,2,"F8VPN4, Q69ZN7"
+solubility_up,Q8BZZ3,2,"Q69ZN7, F8VPN4"
+solubility_up,Q8BZJ7,2,"Q9QZ73, P70170"
+solubility_up,Q8BYM8,2,"F8VPN4, P70170"
+solubility_up,Q8C0L9,2,"Q69ZN7, F8VPN4"
+solubility_up,Q8K1E6,2,"Q69ZN7, F8VPN4"
+solubility_up,Q8C5Z9,2,"Q69ZN7, P28665"
+solubility_up,Q8CGY6,2,"F8VPK0, P70170"
+solubility_up,Q9QZ23,2,"Q69ZN7, F8VPN4"
+solubility_up,Q9QZ73,2,"Q8BZJ7, P70170"
+solubility_up,Q9R1S8,2,"Q69ZN7, F8VPN4"
+solubility_up,Q9R111,2,"F8VPN4, P70170"
+solubility_up,G3X8U3,2,"F8VPN4, P70170"
+solubility_up,O08992,2,"Q69ZN7, F8VPN4"
+solubility_up,O35206,2,"Q69ZN7, F8VPN4"
+solubility_up,D3Z689,2,"F8VPN4, Q571I9"
+solubility_up,E9Q777,1,P70170
+solubility_up,O08547,1,P70170
+solubility_up,O35344,1,Q8CGY6
+solubility_up,O08917,1,Q64727
+solubility_up,Q8BIP0,1,F8VPN4
+solubility_up,Q8BFZ9,1,Q91X78
+solubility_up,O35459,1,P70170
+solubility_up,O35857,1,P70170
+solubility_up,Q9QZH6,1,F8VPN4
+solubility_up,Q9WV95,1,Q69ZN7
+solubility_up,Q8C006,1,F8VPN4
+solubility_up,Q8BX80,1,F8VPN4
+solubility_up,Q8R146,1,F8VPN4
+solubility_up,Q8JZL3,1,F8VPN4
+solubility_up,Q8QZR5,1,F8VPN4
+solubility_up,Q91YP2,1,F8VPN4
+solubility_up,Q91XD6,1,F8VPN4
+solubility_up,Q91VH6,1,F8VPN4
+solubility_up,Q8VHD8,1,F8VPN4
+solubility_up,Q8VCT3,1,F8VPN4
+solubility_up,Q8BTS4,1,P70170
+solubility_up,Q8BK84,1,F8VPN4
+solubility_up,Q8BGS2,1,Q9D8S9
+solubility_up,Q8BHE8,1,P28665
+solubility_up,Q8BMK4,1,Q9R269
+solubility_up,Q91XD7,1,F8VPN4
+solubility_up,Q80Y14,1,F8VPN4
+solubility_up,Q80ZJ6,1,P70170
+solubility_up,Q78JE5,1,F8VPN4
+solubility_up,Q6PHZ2,1,P49138
+solubility_up,Q6PHN9,1,Q9JIW9
+solubility_up,Q6PHN1,1,Q9R269
+solubility_up,Q6PFD9,1,F8VPN4
+solubility_up,Q6P069,1,F8VPN4
+solubility_up,Q6NZJ6,1,F8VPN4
+solubility_up,Q8BTZ7,1,F8VPN4
+solubility_up,Q9JKV1,1,Q571I9
+solubility_up,Q9JIW9,1,Q6PHN9
+solubility_up,Q9JL26,1,P70170
+solubility_up,Q9DCZ4,1,P70170
+solubility_up,P08074,1,Q9EQ06
+solubility_up,Q9D9V3,1,P70170
+solubility_up,Q9D1X0,1,Q571I9
+solubility_up,Q9D0F9,1,F8VPN4
+solubility_up,Q80U93,1,F8VPN4
+solubility_up,Q80VJ2,1,Q64727
+solubility_up,Q80X95,1,P70170
+solubility_up,Q924Z4,1,P70170
+solubility_up,Q99K82,1,F8VPN4
+solubility_up,Q99K28,1,P70170
+solubility_up,Q61699,1,F8VPN4
+solubility_up,Q61548,1,P70170
+solubility_up,Q9D0C4,1,F8VPN4
+solubility_up,Q9CQK7,1,P70170
+solubility_up,Q62188,1,F8VPN4
+solubility_up,Q64314,1,P70170
+solubility_up,Q99LB6,1,F8VPN4
+solubility_up,Q69ZN7,1,F8VPN4
+solubility_up,Q99M01,1,F8VPN4
+solubility_up,Q99PP9,1,F8VPN4
+solubility_up,Q11136,1,F8VPN4
+solubility_up,Q9CQX2,1,F8VPN4
+solubility_up,Q9CZW4,1,F8VPN4
+solubility_up,Q5SRX1,1,P70170
+solubility_up,Q571I9,1,F8VPN4
+solubility_up,Q4VBD2,1,P70170
+solubility_up,Q3U2P1,1,F8VPN4
+solubility_up,Q3THS6,1,F8VPN4
+solubility_up,P03930,1,P70170
+solubility_up,Q9DCJ9,1,F8VPN4
+solubility_up,Q9D7J4,1,P70170
+solubility_up,P35700,1,Q69ZN7
+solubility_up,P22892,1,P70170
+solubility_up,P62962,1,F8VPN4
+solubility_up,P57759,1,P70170
+solubility_up,P54728,1,F8VPN4
+solubility_up,P49817,1,P70170
+solubility_up,P50462,1,F8VPN4
+solubility_up,Q8CI70,0,
+solubility_up,Q9QYS9,0,
+solubility_up,D3Z4S3,0,
+solubility_up,Q8CIN4,0,
+solubility_up,E9Q784,0,
+solubility_up,F8VPN4,0,
+solubility_up,Q91W29,0,
+solubility_up,Q8CI12,0,
+solubility_up,Q9CQC6,0,
+solubility_up,Q921M7,0,
+solubility_up,Q91Z31,0,
+solubility_up,Q9CQW1,0,
+solubility_up,Q61166,0,
+solubility_up,P68040,0,
+solubility_up,Q06138,0,
+solubility_up,Q9D6K8,0,
+solubility_up,P70170,0,
+solubility_up,P83093,0,
+solubility_up,P30677,0,
+solubility_up,P28738,0,
+solubility_up,P54823,0,
+solubility_up,P46414,0,
