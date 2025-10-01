@@ -44,7 +44,7 @@ Our project provides a unified toolkit for mapping, quantifying, and exploring t
 * Kincaid Rowbotham [@kincaidrowboth](https://github.com/kincaidrowboth)
 * Lei Li [@LeiLi-Uchicago](https://github.com/LeiLi-Uchicago)
 * Saranya Canchi [@s-canchi](https://github.com/s-canchi)
-* Madhan Kumar Tammineni (@Madhan120-prog)[https://github.com/Madhan120-prog]
+* Madhan Kumar Tammineni [@Madhan120-prog](https://github.com/Madhan120-prog)
 * Ankita Tukaram Kandalkar 
 
 
