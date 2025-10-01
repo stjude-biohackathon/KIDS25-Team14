@@ -3,7 +3,7 @@
 
 ## Biological context & motivation
 
-Aging leads to a progressive decline in proteostasis (protein homeostasis), which manifests as a **reduction in global protein solubility**across mammalian tissues. This decline is strongly linked to cumulative **oxidative damage and post-translational modifications**, which increase the propensity of proteins to misfold and aggregate.
+Aging leads to a progressive decline in proteostasis (protein homeostasis), which manifests as a **reduction in global protein solubility** across mammalian tissues. This decline is strongly linked to cumulative **oxidative damage and post-translational modifications**, which increase the propensity of proteins to misfold and aggregate.
 
 These effects are especially pronounced in long-lived, non-dividing cells such as neurons, skeletal/cardiac muscle, and heart, where insoluble, aggregated proteins can persist and accumulate over a lifetime. The accumulation of insoluble protein is a well-documented feature of aging brains and neurodegenerative diseases and is likely important for muscle and cardiac aging as well.
 Our project provides a unified toolkit for mapping, quantifying, and exploring these changes in proteomic datasets, enabling new insights into where and why insolubility and aggregation risks are greatest.
